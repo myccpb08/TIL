@@ -19,3 +19,14 @@ for cit in city.keys():
             mincity = cit
 
 print(maxcity,maxtmp, mincity, mintmp)
+
+#서울은 영상 2도였던 적이 있나요?
+count = 0
+for i in city['서울']:
+    if i == 2:
+        print("네 있습니다")
+        break
+    else:
+        if count==len(city['서울'])-1:
+            print("없습니다")
+        count = count +1
