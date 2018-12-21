@@ -8,3 +8,4 @@ for item in result:
     rank = item.select_one('.ah_r').text
     keyword = item.select_one('.ah_k').text
     print(f'{rank} / {keyword}')
+    
