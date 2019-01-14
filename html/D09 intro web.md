@@ -196,3 +196,195 @@ ex) `google.com/dir/dir2/../WantThis.file`
 
 ### HTTP(s) (Hyper Text Transfer Protocol (secure))
 
+``` html
+<!-- 실습-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>프로그래밍 교육</h1>
+    <hr>
+     <a href="https://docs.python.org/ko/3/tutorial/index.html" target="_blank"><h2 id="python">파이썬</h2></a>
+    <h2 id="python">파이썬</h2>
+    <h3>Number type</h3>
+    <p>파이썬에서 숫자형은 아래와 같이 있다.</p>
+    <ol>
+        <li>int</li>
+        <li>float</li>
+        <li>complex</li>
+        <li><del>str</del></li>
+    </ol>
+    <h3>Sequence</h3>
+    <p>파이썬에서 시퀀스는 아래와 같이 있다.</p>
+    <p><b>시퀀스는 for 문을 돌릴 수 있다!!</b></p>
+    <ol>
+        <li>str</li>
+        <li>list</li>
+        <li>tuple</li>
+        <li>range</li>
+    </ol>
+    <hr>
+    <a href="https://developer.mozilla.org/ko/" target="_self"><h2>웹</h2></a>
+    <h2>웹</h2>
+    <h3>기초</h3>
+    <!-- none, square, circle, lower_alpha, upper-alpha, upper-roman, ... -->
+    <ul style="list-style-type:circle;">
+        <li>HTML</li>
+        <li>CSS</li>
+    </ul>
+
+    <!-- a(anchor) 버튼 만드는 거 : _self 라고 쓰면 새 창 열리지 않고, 현재 화면에서 요청된 다른 화면으로 
+                                   _blank 라고 하면 새 탭-->
+    <!-- href values
+        1. 절대 URL : ex)google.com
+        2. 상대 URL : 현재 파일이 작성된 폴더를 시작으로 목표를 찾아가는 것
+        3. element id
+        4. mailto:
+     -->
+    <a href="https://www.google.com" target="_self">절대 URL</a><br>
+    <a href="index.html" target="_blank">상대 URL</a><br>   #index.html 파일 열어줌
+    <a href="#python">파이썬으로(id python)<br>   # id=python 인 지정영역으로 이동
+    <a href="mailto:mycpb08@naver.om=">메일보내기 URL</a>
+</body>
+</html>
+```
+
+2번째 실습 : 섹션태그
+
+```html
+  <!-- 실습2 섹션태그 -->
+<section id="python"> 
+    <hr>
+    <a href="https://docs.python.org/ko/3/tutorial/index.html" target="_blank"><h2>파이썬</h2></a>
+    <h3>Number type</h3>
+    <p>파이썬에서 숫자형은 아래와 같이 있다.</p>
+    <ol>
+        <li>int</li>
+        <li>float</li>
+        <li>complex</li>
+        <li><del>str</del></li>
+    </ol>
+    <h3>Sequence</h3>
+    <p>파이썬에서 시퀀스는 아래와 같이 있다.</p>
+    <p><b>시퀀스는 for 문을 돌릴 수 있다!!</b></p>
+    <ol>
+        <li>str</li>
+        <li>list</li>
+        <li>tuple</li>
+        <li>range</li>
+    </ol>
+</section>
+```
+
+
+
+3번째 실습: 이미지태그
+
+```html
+<img src="uyuni.jpg" alt="" width="" heght="">
+```
+
+
+
+4번째 실습 : 비디오 태그 (video iframe)
+
+```html
+<video src="video.mp4" width="300" height="" controls></video> 
+# controls : 재생버튼 넣어주기
+# iframe 은 웹비디오의 html 코드 긁어와서 이용
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WPHEpJwmqnc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
+
+
+
+###### 이미지로 a태그 만들기
+
+```html
+<a href="#python"><img src="a.jpg" alt="" width="50" heght="50"></a>
+<a href="#web"><img src="b.jpg" alt="" width="50" heght="50"></a>
+```
+
+
+
+5번째 실습 : 테이블 태그(3*4 표)
+
+```html
+<table>
+        <!-- table row -->
+        <tr>
+            <!-- table head -->
+            <th></th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+        </tr>
+        <tr>
+            <!-- talbe data -->
+            <td>A코스</td>
+            <td>짬뽕</td>
+            <td>초밥</td>
+            <td>스파게티</td>
+        </tr>
+        <tr>
+            <td>B코스</td>
+            <td>미역국</td>
+            <td>김치찌개</td>
+            <td>삼계탕</td>
+        </tr>
+    </table>
+
+표 테두리 그리려면
+head 에서 style 추가 : style 내부는 css
+<style>
+        table, tr, td {
+            border: 1px solid darkgray;
+        }        
+</style>
+
+2개의 열 합치기 (가로로 긴)
+<td colspan="2">초밥</td>  # 초밥은 2칸 차지
+
+2개의 행 합치기 (세로로 긴)
+<td rowspan="2">짬뽕</td>
+```
+
+
+
+6번째 : form 태그 = 입력창 만들기
+
+action : 특정 위치(url)을 적음
+
+```html
+<form action="" method="">  # method 빈칸으로 두면 속성값 get 이 기본
+    <input type="text">  # text 를 넣을 박스
+    
+    <input type="password">   # 비밀번호 넣을 박스 (text 가 바로 표시 x)
+    
+    <input type="submit" value="로그인">  # 로그인 버튼 처럼 누르면 정보 전송, value는 박스名
+    
+    <input type="number"> # 숫자만 입력받음. 올리고 내리는 버튼 有
+    <input type="number" min="15" max="30" step="5">  # 범위 지정 가능
+    
+    <input type="radio"> # 동그라미 선택버튼 1개만 선택할 때
+    <input type="radio" name="sandwich" checked>에그마요<br> # 기본으로 선택되어 있는 값
+    <input type="radio" name="sandwich">BMT<br>
+    <input type="radio" name="sandwich">귤<br> # 이름을 같에 해두면 3개가 동시 선택 안 되고, 한 개 선택
+    
+    <input type="checkbox"> # 다중선택용, name 넣어줄 수 있음 (장르라는 네임아래, 영화 다중선택가능)
+    
+    ============
+    
+    <select name="" id="">      # 쇼핑할 때 옵션 박스처럼  화살표 있는 거
+        <option>허니오트</option>
+        <option disabled>플랫브레드</option>  # 품절인 항목처럼 목록에는 있는데 선택은 안 됨
+        <option selected>파마산 오레가노</option> # 기본으로 설정되어 있는 값
+    </select>
+    
+</form>
+```
+
