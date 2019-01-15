@@ -9,13 +9,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hi,HTML!</title>
     <!-- style 내부는 css 코드로 -->
-    <style>h1 { color: aquamarine; }</style>
+    <!-- 2. Embedding style(style tag 사용하기) -->
+    <style>
+        /* css */
+        /* h1 : 선택자 */
+        /* color : 속성(property */
+        /* aquamarine : 값(value) */
+        /*  {   }   : 선언 블록 */
+        /* color: aquamarine;  : 선언문 */
+        /* {.......} : 선언블록 + 선언문 = 규칙 */
+        /* 규칙 묶음 : 스타일 시트 */
+        h1 { 
+            color: aquamarine; 
+        }
+    </style>
+    <!-- 3. Link style (css 파일 link) -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <!-- body 는 실제 user 가 브라우저에서 보게 되는 내용 -->
 <body>
-   <h1>Hi, h1!</h1>
+   <h1>Hi, h1!(2. 임베딩)</h1>
    <h2>Hi, h2!</h2>
-   <h3>Hi, h3!</h3>
+   <h3>Hi, h3!(3. css 파일로 스타일 변경. 가장 사용 多)</h3>
    <h4>Hi, h4!</h4>
    <h5>Hi, h5!</h5>
    <h6>Hi, h6!</h6>
