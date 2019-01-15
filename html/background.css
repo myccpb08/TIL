@@ -1,0 +1,16 @@
+div {
+    height: 200px
+}
+
+.background-color {
+    background-color: blue;
+}
+
+.background-image {
+    background-image: url(uyuni.jpg);
+    background-position: center center ;
+    background-size: cover;
+    /* contain(짧은 길이 기준) , cover(긴 길이 기준) */
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}

@@ -1,0 +1,10 @@
+.font {
+    /* 1. font-size */
+    font-size: 40px;
+    font-style: italic;
+    font-weight: bold; /* 숫자 700 써도 ok*/
+    font-family: 'Nanum Pen Script', Times, serif;
+    line-height: 1.5; /* 폰트 사이즈에 따라 라인을 띄울 수 있다 */
+    letter-spacing: 4px;  /* 글자 사이 간격. 음수면 좁아지고 양수면 멀어진다*/
+    text-align: center;
+}
