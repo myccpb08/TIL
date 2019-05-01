@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="my"></div>
+    <button id="this-button">Click me</button>
+
+    <script>
+        /* 
+            Event Listener
+            [무엇] 을 [언제] [어떻게] 한다.
+            ex) 위에서 만든 ['Click me 라는 버튼']을 ['클릭']하면  ['메시지` ] 가 나온다    
+        */
+
+        // 1. 무엇 : 버튼
+        const button = document.querySelector('#this-button')  // id 값 가져올 때는 # 버튼
+
+        // 2. 언제 : 클릭할 때
+        button.addEventListener('click', function(event){  // 이 버튼을 클릭하면 (click 이 첫번째 인자), 어떤 행동 (act 할 callback 함수가 두번째 인자)
+        
+        // 3. 어떻게 :  메시지를 보임
+            const area = document.querySelector('#my')  // area 라는 변수로 위에 빈 div 를 가져옴
+            area.innerHTML = '<h1>뿅</h1>'  // innerHTML : html 태그를 같이 보냄, area 에 뿅이라는 메시지를 넣어
+        })
+    </script>
+</body>
+</html>

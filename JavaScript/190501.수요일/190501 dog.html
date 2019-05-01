@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!--axios 쓰려고 붙여넣음-->
+    <style>
+        img {
+            width: 300px;
+            height: 300px;
+        }    
+    </style>
+</head>
+
+<body>
+    <div>
+        <button id="dog">Dog!</button>
+    </div>
+
+    <script>
+        const button = document.querySelector('#dog')
+        button.addEventListener('click', function(event){
+            // API 로 요청 보내는 code
+            axios.get('https://dog.ceo/api/breeds/image/random') // axios.get 으로 보내서 받는 건 Promise 객체. 요청을 보내면 응답을 보내주겠다는 약속. 수행되는 시간을 단정지을 수 없지만 오긴 온다. promise 는 점(.) 메소드를 가지고 있어서 then 과 catch 를 쓸 수 있다
+                        .then(function (response) {  // 성공했으면 then 실행
+                            // handle success
+                            console.log(response);
+                            return response.data.message  // 응답받은 강아지 사진 링크
+                        })
+                        // then 추가도 가능 ( get 이라는 함수의 return 값이 무엇인지에 따라 가능 불가능이 있긴 함, promise 라는 객체일 때 가능)
+                        .then(function(url){  // 앞의 then 에서 얻은 return 값이 이번 익명함수의 parameter 로 들어감 , url = response.data.message
+                            const imgTag = document.createElement('img')   // write 는 단순히 쓰기만 하는 거고, createElement 는 태그도 만들 수 있음
+                            imgTag.src = url;
+                            document.querySelector('body').append(imgTag)  // 위에서 만든 이미지태그를 body 태그 가장 끝에 append 해
+                        })
+                        .catch(function (error) {  // 요청에 실패하면 catch 실행  ( 얘도 promise 객체일 때 가능)
+                            // handle error
+                            console.log(error);
+                        })
+        })
+        
+    </script>
+</body>
+</html>
