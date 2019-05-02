@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- JS 위치 1 
+      자바 스크립트를 사용하기 위한 준비단계 
+        * 문서 제목 변경가능-->
+</head>
+<body>
+
+    <!-- JS 위치 2 
+        body 닫는 태그 바로 위에 보통 쓴다. 즉, body의 가장 하단에 -->
+
+    <script>  // JS로 동작하는 코드 
+        /* 다중주석 */
+        alert('Welcome to JS!')  // alert : 프린트, 알림창으로, 브라우저이벤트조작함수, 버튼이나 레이아웃을 우리가 만든 적 없는데 저절로
+        
+        // 문서에 출력하기
+        document.write('<h1>Hello, World!</h1>')  // document. = document 불러오기(전역에 저절로 정의되어있음), 태그를 포함해서 따옴표에 넣어줘야 함
+
+        // 변수선언 (종류 2가지 : 나중에 변경 될 가능성이 있는 아이인지, 계속 가는 애인지)
+        // 1. let: 재할당가능  바뀌는 애
+        let word = '외안되<br>'   // let word >> word='외안되' 이렇게 두 줄로 작성해도 가능
+        document.write(word)
+        word = "왜안돼<br>"
+        document.write(word)  // 왜안돼라고 출력
+
+        // 2. const : 재할당불가능
+        const word2 = '외안되<br>'   // 무조건 const 선언과 동시에 무슨값을 넣을건지 같은 문장에 써야함
+        document.write(word2)
+
+        const firstName = 'happy'  // const 에 숫자 뿐 아니라 문자도 가능
+        const lastName = 'hacking'
+        const fullName = firstName + lastName
+        document.write('<h1>' + fullName + '!!' + '</h1>')  // 문자열 더하기 가능
+        document.write(`<h1>${fullName}!!</h1>`)  // 파이썬의 문자열 포맷팅, 여기서는 백틱(`) 과 $ 사용, 위와 동일 문장
+
+        // console 에 출력하기
+        console.log(`Console: ${fullName}`)  // 브라우저 창 말고, 개발자도구 console 창에 뜸
+
+        // 사용자 입력 받기
+        /* Python : user_name (snake_case)
+             JS : userName (CamelCase) */
+        /*const userName = prompt('Hello! Who are you?')  //prompt : 브라우저 조작 method, input 함수처럼 실행되면 다음 입력할 값을 기다리게 됨
+        let message = `<h1>Hello ${userName} </h1>`  // 위의 물음에 대하여 input 값으로 입력한 값이 userName=입력값으로  들어감, kyr 을 팝업창에 쓰면
+        document.write(message)  // Hello kyr 쓰여짐 */
+
+        // if 문 :  // js 에서 if문 등호는 , 등호 3개
+        const userName = prompt('Hello! Who are you?') 
+        let message = ' '
+        if (userName === 'admin') {
+            message =  `<h1>This is secret Admin page</h1>` 
+        } else if (userName == 'nwith') {
+            message =  `<h1>No water in the house?</h1>` 
+        } else {
+            message = `<h1>Hello ${userName} </h1>`
+        }
+        document.write(message)
+
+        // == vs ===
+        // == : '값' 만 비교 (ex,  0 == '0'  는 True)
+        // === : '값; & '타입' 비교  ( ex  0 === '0'  는 False)
+
+        // 삼항 연산자 (if 문 짧게 쓰기 )
+        const number = 10
+        number === 10 ? document.write('number === 10') : document.write('number !== 10')
+
+        // 세미콜론 테스트
+        const a = 1
+        const b = 2
+        /*const c = a+b
+
+        (a+b).toString()   /* 이대로 실행하면 에러남   윗 줄이랑 분리를 못 해서  const c = a+b(a+b).toString()  으로 됨, 그러므로 const c = a+b; 이렇게 줄 끝났다고 표시 */ 
+
+        const c = a+b;
+        (a+b).toString()
+
+        //Array (배열)
+        const numbers = [1,2,3,4]
+
+        console.log(numbers[0]) // 이 값은 1
+        console.log(numbers[-1])  // 음수 인덱스는 제공 x
+
+        // Object
+        const me = {
+            name: 'nwith',
+            'phone number': '01012345678',  // 띄어쓰기 있는 key 값을 쓸 때는 꼭 따옴표 붙이기 , 한 단어는 따옴표 안 써도 됨
+            appleProducts: {
+            ipad:true,
+            iphone: 'X'}
+            }
+
+
+
+    </script>
+
+
+</body>
+</html>
