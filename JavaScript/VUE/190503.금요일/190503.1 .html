@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>190503</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ message}}  <!-- script 에 작성한 data 의 hello,vue! 지칭, id="app" 으로 한 애 안에 있어야 인식가능 -->
+        {{ count }}
+        <p v-if="checked">체크가 true 면 이건 보임</p>  <!-- console 에서 app.checked=false 로 바꾸면 글자 사라짐 -->
+        <p v-if="count > 0">카운트가 0 이상이 면 이건 보임</p>
+        전체 {{ posts }}
+
+        <li v-for="post in posts ">
+            {{ post }}
+        </li>
+
+        <li v-for="info in student">
+            {{ info }}   <!-- 파이썬은 key 값이 출력되었지만, vue 는 value 값을 출력해줌-->
+        </li>
+
+        <li v-for="info in Object.keys(student)">  <!-- 얘는 key 값 -->
+            {{ info }}
+        </li>
+
+         <!-- 얘는 세트로  -->
+        <li v-for="info in Object.keys(student)"> 
+            {{ info }} - {{ student[info] }}
+        </li>
+
+    </div>
+
+    <script>
+        const app = new Vue({     // Vue 의 인스턴스 만들기
+            el: '#app',  // id="app" 인 div 태그 지칭,   el = element , vue 인스턴스를 어떤 element 와 동기화를 할 거니?
+            data: {
+                message : 'Hello, Vue!',
+                count : 0 ,
+                checked : true, 
+                posts : ['첫 게시물', '두번째 게시물', '세번째!'],
+                student : {
+                    name : 'nwith',
+                    univ : 'KNU',
+                },
+            } ,
+            methods : {  // 어떻게 . 데이터를 조작하는 함수들 넣어줌
+                    // this.message  : this = 자기자신 = vue 인스턴스   ∴ this.message  = 위의 메시지
+                plus : function() {  // arrow functin 쓰면 안 되고, 무조건 function 형태로만
+                    this.count++  // 이렇게하고, f12 콘솔창 에 app.plus() 라고 치면 위에 count 값 1씩 올라감 
+                }
+            }
+        })
+    
+    </script>
+
+</body>
+</html>

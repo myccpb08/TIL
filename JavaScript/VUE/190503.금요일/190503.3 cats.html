@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cats</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Vue import -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  <!-- axios import -->
+    <style>
+        img {
+                width : 400px;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="getCatImage">야옹</button>  <!-- 1. button 을 클릭하면, getCatImage 라는 메소드를 행해줘-->
+                                                                                              <!-- v-on : click 이렇게 띄우면 안 됨. 무조건 붙여 -->
+        <div>
+            <img v-bind:src="imageURL" alt="cat image"> <!-- 2. 사진이 보여질 공간, v-bind 사용
+                                                                                                        imageURL 이 이번에는 앞과 다르게 속성값에 JS 값을 넣어야 한다 
+                                                                                                        이 경우에는 {{ }} 로 바로 표현할 수 없기 때문에 v-bind 를 사용한다 -->
+         </div>
+    </div>
+
+    <script>
+        const app = new Vue ({
+            el : '#app',
+            data : {
+                imageURL : ' ',  // 랜덤고양이 url 
+            },
+            methods: {
+                getCatImage : function() {   // getCatImage 라는 메소드는 , axios 를 통해 요청보내기
+                        axios.get('https://api.thecatapi.com/v1/images/search')   // 요청보내면
+                            .then((response) => {       /* 응답받아서 어떻게 처리할지 말해주는 f
+                                                                             그냥 function 말고 arrow func 로 꼭꼭꼭💕 써야함 ( ∵ 아래에 this 라는 표현을 쓰기 위하여)
+                                                                             💨`javascript arrow function this` 라고 검색하면 자료 많음
+                                                                              response 에 응답받은 data 들어있음
+                                                                               response 열어보면  response → data 의 첫번째 배열  → url  로 들어가야함  
+                                                                               response.data = [{"breeds":[],"categories":[{"id":6,"name":"caturday"}],"id":"MTUyOTMzMw","url":"https://cdn2.thecatapi.com/images/MTUyOTMzMw.jpg","width":640,"height":426}]*/
+                                                                this.imageURL = response.data[0].url
+
+                            })   
+                }
+            }
+        })
+    </script>
+</body>
+</html>
