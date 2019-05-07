@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- text vs html -->
+        <div v-text="header">  <!-- 하면 그냥 문자열로 취급 --> </div>
+        <div v-html="header"> <!-- 실제 html 로 바꾸어 h1 태그로 입력 --> </div>
+
+
+        <h1 v-if="visible">v-if</h1>  <!-- false 일 때, 흔적도 없이 사라짐. 생겼다 죽었다 렌더링 반복-->
+        <h1 v-show="visible">v-show</h1>  <!-- 그냥 숨겨지는 것 . 렌더링 없고 그 자리에 계속 있음 ( 개발자도구에서 존재) -->
+
+        <!--app.$el  & app.$data -->
+
+        <!-- 'v-on:' = @   너무 자주 쓰는 속성이라 약자로 만들어 놓음 -->
+        <!-- 'v-bind:' = `:`  -->
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                header: '<h1>제목입니다.</h1>',
+                visible: true,
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 앞에 $ 붙어 있는 키는  바로 불러오지 못 한다 -->
