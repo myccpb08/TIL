@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <!-- VueFire -->
+    <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+    <script>
+    // Initialize Firebase
+    // TODO: Replace with your project's customized code snippet
+    var config = {
+        apiKey: "AIzaSyD0ChKVrxAo5miPq-SjMZbozsC1wi0hylU",
+        authDomain: "vue-todo-0821.firebaseapp.com",
+        databaseURL: "https://vue-todo-0821.firebaseio.com",
+        projectId: "vue-todo-0821",
+    };
+    firebase.initializeApp(config);
+    </script>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <select v-model="status">
+            <option value="all" selected>All</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+        </select>
+        
+        <ul>
+            <li v-for="todo in todosBystatus" v-bind:key="todo.id" >
+                <input type="checkbox" v-model="todo.completed" v-on:change="updateTodo(todo)">   
+                <span v-bind:class="{completed: todo.completed}">{{ todo.content }}</span>
+            </li>
+        </ul>
+
+        <div>
+            <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">  <!--enter키를 눌렀을 때, addTodo 를 실행해. keyup 쓰고 점(.) 찍고 무슨 키 누를지 적어주면 됨.-->
+            <button v-on:click="addTodo">+</button>
+        </div>
+        <footer>
+            <button v-on:click="clearCompleted">삭제</button>
+        </footer>
+    </div>
+
+
+    <script>
+        const database = firebase.database() // firebase db 기능 쓸 수 있게 함
+
+        const app = new Vue({
+            el : '#app',
+            data : {
+                status : 'all',
+                newTodo : '',
+                // todos: [
+                //     {
+                //         id : 1,
+                //         content : '점심 메뉴 고민하기',
+                //         completed: true,
+                //     },
+                //     {   
+                //         id : 2,
+                //         content:  '사다리 타기',
+                //         completed: false,
+                //     },
+                //     {
+                //         id : 3,
+                //         content :  '약속의 2시. 낮잠자기',
+                //         completed: false,
+                //     },
+                //     {
+                //         id : 4,
+                //         content: '야자하기',
+                //         completed : false,
+                //     }   
+                // ]
+            },
+        
+        firebase: {
+            todos : database.ref('messages'),  // database : firebase db 전체,  차곡차곡 데이터 쌓으려면 database.ref('임의변수명')
+        },
+
+        methods : {   // methods = vue 가 할 일 정의
+            check: function(todo) {
+                todo.completed = !todo.completed
+            },
+            addTodo : function() {
+                this.$firebaseRefs.todos.push({
+                    id: Date.now(), // 시간으로 아이디로 설정하면 절대 중복 안 된다
+                    content : this.newTodo,
+                    completed : false,   // 값을 넣고
+                })
+                this.newTodo = ''  // 넣은 후에는 input 창 깨끗하게
+            },
+
+            //  핵심은 '.filter' 의 사용! ( 완료된 일을 지우고 싶으면, 완료되지 않은 일을 남기는 것으로 접근하기)
+            clearCompleted: function(){
+                const CompletedTodos = this.todos.filter((todo)=>{
+                    return todo.completed
+                })  // notCompletedTodos = [{...}, {...}] 완료되지 않은 애들만 담긴 새로운 배열 만들어짐 
+                // this.todos = notCompletedTodos  // 새로 만들어진 애들로 todos 를 교체 
+                CompletedTodos.forEach((todo)=>{
+                    this.$firebaseRefs.todos.child(todo['.key']).remove()
+                })
+            },
+
+            updateTodo : function(todo){ // 우리가 작성한 todo
+            // todo = {'content:'hi', completed:true}
+            // ...todo =  'content':'hi', completed:true
+            // spread operator : 복사본 만들기 위하여 
+                const newTodo = { ...todo }
+                delete newTodo['.key']
+                this.$firebaseRefs.todos.child(todo['.key']).set(newTodo)
+            },
+        },
+
+        computed : {
+            todosBystatus : function(){
+                if (this.status === 'active') {  // 완료 안 된 애들
+                    return this.todos.filter((todo)=>{
+                        return !todo.completed
+                    })
+                }
+
+                if (this.status === 'completed'){ // 완료된 애들
+                    return this.todos.filter((todo)=>{
+                        return todo.completed
+                    })
+                }
+                return this.todos
+            },
+        },
+        })
+    </script>
+</body>
+</html>
