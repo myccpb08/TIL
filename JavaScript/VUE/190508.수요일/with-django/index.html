@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>마지막수업</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="music in musics">
+                <div>
+                    {{ music.artist_name }} - {{ music.title }}
+                </div>
+                <ul>
+                    <li v-for="comment in music.comment_set">
+                        {{ comment.content }}
+                        <button @click="deleteComment(music,comment)">삭제</button>
+                    </li>
+                </ul>
+                <div>
+                    <input type="text" v-model="music.newComment">
+                    <button @click="addComment(music)">작성</button>
+                    <br>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                newComment: '',
+                musics: [], // 응답받은 데이터가 들어갈 곳 
+            },
+
+            methods: {
+                getMusics: function () {
+                    axios.get('http://playground-myccpb08.c9users.io:8080/api/v1/musics/')
+                        .then((response) => {
+                            return response.data
+                            console.log(response.data)
+                        })
+                        .then((musics) => {
+                            this.musics = musics.map((music) => {
+                                return { ...music, newComment: '' } // 카피해서 거기에 댓글까지 넣어 update
+                            })
+                        })
+                        .catch((error) => {  // 응답 못 받았을 때
+                            console.log(error)
+                        })
+                },
+
+                addComment: function (music) {
+                    axios.post(`http://playground-myccpb08.c9users.io:8080/api/v1/musics/${music.id}/comments/`, { content: music.newComment })
+                        .then((response) => {  // 주소쓸 때 백틱
+                            return response.data
+                        })
+                        .then((comment) => {
+                            music.comment_set.push(comment)
+                            music.newComment = ''
+                        })
+                        .catch((error) => {  // 응답 못 받았을 때
+                            console.log(error)
+                        })
+                },
+
+                deleteComment: function (music, comment) {
+                    axios.delete(`http://playground-myccpb08.c9users.io:8080/api/v1/musics/${music.id}/comments/${comment.id}/`)
+                        .then((response) => {
+                            music.comment_set = music.comment_set.filter((c) => {
+                                return c.id !== comment.id  // id가 comment 의 id 와 다른 댓글들 (즉, comment 를 제외한 댓글들) 만 music.comment_set 배열에 담는다 (∴ 삭제할 애 제외)
+                            })
+                        })
+                        .catch((error) => {  // 응답 못 받았을 때
+                            console.log(error)
+                        })
+                },
+            },
+
+            mounted: function () {  // console 창에 app.getMusics() 라고 치지않고, 새로고침할 때 마다 요청보내도록
+                this.getMusics()
+            },
+        })
+
+    </script>
+
+</body>
+
+</html>
